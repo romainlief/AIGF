@@ -1,4 +1,4 @@
-from Girl import VirtualGirlfriend
+from src.GFTemplate.AbstractGF.Girl import VirtualGirlfriend
 
 """
     Class for Yandere virtual girlfriend
