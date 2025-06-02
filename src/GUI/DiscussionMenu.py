@@ -6,7 +6,7 @@ class DiscussionMenu(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("AI Girlfriend")
-        self.setGeometry(100, 100, 500, 400)
+        self.setGeometry(100, 100, 1000, 900)
 
         # Chat context
         self.context_choice = ""
