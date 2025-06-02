@@ -58,8 +58,6 @@ class DiscussionMenu(QMainWindow):
 
                 # Update the context with the new conversation
                 self.context_choice += f"\nUser: {user_message}\nAI: {result}"
-
-                # Clear the input field
                 self.input_field.clear()
             except Exception as e:
                 self.chat_history.append(f"Error: {e}")

@@ -12,6 +12,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.discussion_menu = None
         self.setWindowTitle("AI Girlfriend")
         self.setGeometry(100, 100, 500, 400)
 
@@ -50,7 +51,8 @@ class MainWindow(QMainWindow):
             tsundere = Tsundere("Tsundere")
             self.context_choice = tsundere.get_context()
         elif choice == "Normal":
-            self.context_choice = "You are my girlfriend Jade, answer my questions as Jade the girl who loves me, the assistant, only."
+            self.context_choice = ("You are my girlfriend Jade, answer my questions as Jade the girl"
+                                   " who loves me, the assistant, only.")
         self.open_discussion_menu()
 
     def open_discussion_menu(self):
