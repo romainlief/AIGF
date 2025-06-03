@@ -90,6 +90,9 @@ class DiscussionMenu(BaseWindow):
     def send_message(self):
         user_message = self.input_field.text()
         if user_message.strip():
+            if user_message.lower() in ["quit", "exit"]:
+                self.close()
+                return
             try:
                 self.chat_history.append(f"You: {user_message}")
                 result = chain.invoke({"context": self.context_choice, "question": user_message})

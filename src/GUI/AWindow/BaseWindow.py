@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QMainWindow, QWidget
 
 
 class BaseWindow(QMainWindow):
-    DEFAULT_BACKGROUND = "/Users/romainliefferinckx/PythonProjects/AIGF/ressources/background.jpg"
+    DEFAULT_BACKGROUND = "ressources/background.jpg"
 
     def __init__(self, title="AI Girlfriend", width=1000, height=900):
         super().__init__()
