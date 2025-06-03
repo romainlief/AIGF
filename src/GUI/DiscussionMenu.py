@@ -1,4 +1,5 @@
-from PySide6.QtWidgets import QTextEdit, QLineEdit, QPushButton, QVBoxLayout
+from PySide6.QtWidgets import QTextEdit, QLineEdit, QPushButton, QVBoxLayout, QFrame, QSizePolicy, QLabel, QHBoxLayout
+from PySide6.QtCore import Qt
 from src.LLMSettings.IA import chain
 from src.GUI.AWindow.BaseWindow import BaseWindow
 
@@ -6,24 +7,66 @@ from src.GUI.AWindow.BaseWindow import BaseWindow
 class DiscussionMenu(BaseWindow):
     def __init__(self):
         super().__init__()
-
-    def setup_ui(self):
         self.context_choice = ""
 
+    def setup_ui(self):
+        # ==== Création de la mini-fenêtre ====
+        mini_window = QFrame()
+        mini_window.setFixedSize(550, 500)
+        mini_window.setStyleSheet("""
+            QFrame {
+                background-color: rgba(50, 50, 50, 1);
+                border-radius: 15px;
+                padding: 5px;
+                border: 2px solid rgba(255, 255, 255, 0.8);
+            }
+        """)
+        mini_window.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+
+        # ==== Widgets internes ====
         self.chat_history = QTextEdit()
         self.chat_history.setReadOnly(True)
+        self.chat_history.setFixedHeight(400)
 
         self.input_field = QLineEdit()
         self.input_field.setPlaceholderText("Type your message here...")
+        self.input_field.setFixedWidth(500)
+        self.input_field.setStyleSheet("""
+            QLineEdit {
+                background-color: rgba(180, 180, 180, 0.6);
+                border: 2px solid rgba(50, 50, 50, 0.8);
+                border-radius: 10px;
+                padding: 8px;
+                font-size: 14px;
+                color: black;
+            }
+            QLineEdit:focus {
+                border: 2px solid rgba(100, 150, 255, 0.8);
+                background-color: rgba(230, 230, 230, 1);
+            }
+        """)
 
         self.send_button = QPushButton("Send")
         self.send_button.clicked.connect(self.send_message)
 
-        layout = QVBoxLayout()
-        layout.addWidget(self.chat_history)
-        layout.addWidget(self.input_field)
-        layout.addWidget(self.send_button)
-        self.central_widget.setLayout(layout)
+        # ==== Layout interne de la mini-fenêtre ====
+        inner_layout = QVBoxLayout()
+        inner_layout.addWidget(QLabel("Chat with your AI Girlfriend:"))
+        inner_layout.addWidget(self.chat_history)
+        input_layout = QHBoxLayout()
+        input_layout.addWidget(self.input_field, alignment=Qt.AlignCenter)
+        inner_layout.addLayout(input_layout)
+        inner_layout.addWidget(self.send_button)
+        mini_window.setLayout(inner_layout)
+
+        # ==== Layout principal centré ====
+        main_layout = QVBoxLayout()
+        main_layout.addStretch()
+        main_layout.setAlignment(Qt.AlignCenter)
+        main_layout.addWidget(mini_window, alignment=Qt.AlignCenter)
+        main_layout.addStretch()
+
+        self.central_widget.setLayout(main_layout)
 
     def starting_discussion(self):
         self.chat_history.append("Welcome to the AI Girlfriend Chat!")
