@@ -2,9 +2,11 @@ from PySide6.QtWidgets import QTextEdit, QLineEdit, QPushButton, QVBoxLayout, QF
 from PySide6.QtCore import Qt
 from src.LLMSettings.IA import chain
 from src.GUI.AWindow.BaseWindow import BaseWindow
+from PySide6.QtCore import Signal
 
 
 class DiscussionMenu(BaseWindow):
+    closed_signal = Signal()
     def __init__(self):
         super().__init__()
         self.context_choice = ""
@@ -12,7 +14,7 @@ class DiscussionMenu(BaseWindow):
     def setup_ui(self):
         # ==== Création de la mini-fenêtre ====
         mini_window = QFrame()
-        mini_window.setFixedSize(550, 500)
+        mini_window.setFixedSize(550, 547)
         mini_window.setStyleSheet("""
             QFrame {
                 background-color: rgba(50, 50, 50, 1);
@@ -49,8 +51,15 @@ class DiscussionMenu(BaseWindow):
         self.send_button = QPushButton("Send")
         self.send_button.clicked.connect(self.send_message)
 
+        self.back_button = QPushButton("← Retour")
+        self.back_button.clicked.connect(self.close)
+        self.back_button.setStyleSheet("font-weight: bold;")
+        top_layout = QHBoxLayout()
+        top_layout.addWidget(self.back_button, alignment=Qt.AlignLeft)
+
         # ==== Layout interne de la mini-fenêtre ====
         inner_layout = QVBoxLayout()
+        inner_layout.addLayout(top_layout)
         inner_layout.addWidget(QLabel("Chat with your AI Girlfriend:"))
         inner_layout.addWidget(self.chat_history)
         input_layout = QHBoxLayout()
@@ -89,3 +98,7 @@ class DiscussionMenu(BaseWindow):
                 self.input_field.clear()
             except Exception as e:
                 self.chat_history.append(f"Error: {e}")
+
+    def closeEvent(self, event):
+        self.closed_signal.emit()
+        super().closeEvent(event)

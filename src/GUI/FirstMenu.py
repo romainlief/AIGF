@@ -62,5 +62,8 @@ class MainWindow(BaseWindow):
         if self.context_choice:
             self.discussion_menu = DiscussionMenu()
             self.discussion_menu.context_choice = self.context_choice
+            self.hide()
+            self.discussion_menu.closed_signal.connect(self.show)
             self.discussion_menu.starting_discussion()
             self.discussion_menu.show()
+
