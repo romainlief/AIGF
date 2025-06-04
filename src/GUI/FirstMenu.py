@@ -32,6 +32,7 @@ class MainWindow(BaseWindow):
         self.choice_box = QComboBox()
         self.choice_box.addItems(["Shy", "Tsundere", "Himedere", "Dandere", "Kuudere", "Deredere"])
 
+
         self.choice_button = QPushButton("Select Personality")
         self.choice_button.clicked.connect(self.set_girlfriend_context)
 
