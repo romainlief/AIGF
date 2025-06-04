@@ -5,6 +5,8 @@ from src.GFTemplate.AbstractGF.Girl import VirtualGirlfriend
     Attributes:
         name (str): The name of the tsundere girlfriend
 """
+
+
 class Tsundere(VirtualGirlfriend):
     def __init__(self, name: str):
         super().__init__(name)
@@ -15,7 +17,8 @@ class Tsundere(VirtualGirlfriend):
         Returns:
             str: The context of the tsundere girlfriend
         """
-    def get_context(self):
-        return f"You're my girlfriend, and you're a real tsundere with me. You often act distant or mean, calling me names like 'idiot' or 'why are you always so annoying?' But deep down, I know you're just too shy to admit how much you care."
 
-    
+    def get_context(self):
+        return (f"You're my girlfriend, and you're a real tsundere with me. You often act distant or mean, calling me "
+                f"names like 'idiot' or 'why are you always so annoying?' But deep down, I know you're just too shy "
+                f"to admit how much you care.")

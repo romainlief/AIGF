@@ -3,6 +3,10 @@ from PySide6.QtCore import Qt
 
 from src.GFTemplate.GF_Tsundere import Tsundere
 from src.GFTemplate.GF_Yandere import Yandere
+from src.GFTemplate.GF_Dandere import Dandere
+from src.GFTemplate.GF_Kuudere import Kuudere
+from src.GFTemplate.GF_Deredere import Deredere
+from src.GFTemplate.GF_Himedere import Himedere
 from src.GUI.DiscussionMenu import DiscussionMenu
 from src.GUI.AWindow.BaseWindow import BaseWindow
 
@@ -26,7 +30,7 @@ class MainWindow(BaseWindow):
         mini_window.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
         self.choice_box = QComboBox()
-        self.choice_box.addItems(["Shy", "Tsundere", "Normal"])
+        self.choice_box.addItems(["Shy", "Tsundere", "Himedere", "Dandere", "Kuudere", "Deredere"])
 
         self.choice_button = QPushButton("Select Personality")
         self.choice_button.clicked.connect(self.set_girlfriend_context)
@@ -53,9 +57,18 @@ class MainWindow(BaseWindow):
         elif choice == "Tsundere":
             tsundere = Tsundere("Tsundere")
             self.context_choice = tsundere.get_context()
-        elif choice == "Normal":
-            self.context_choice = ("You are my girlfriend Jade, answer my questions as Jade the girl"
-                                   " who loves me, the assistant, only.")
+        elif choice == "Himedere":
+            himedere = Himedere("Himedere")
+            self.context_choice = himedere.get_context()
+        elif choice == "Dandere":
+            dandere = Dandere("Dandere")
+            self.context_choice = dandere.get_context()
+        elif choice == "Kuudere":
+            kuudere = Kuudere("Kuudere")
+            self.context_choice = kuudere.get_context()
+        elif choice == "Deredere":
+            deredere = Deredere("Deredere")
+            self.context_choice = deredere.get_context()
         self.open_discussion_menu()
 
     def open_discussion_menu(self):
